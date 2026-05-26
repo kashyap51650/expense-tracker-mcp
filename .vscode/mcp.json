@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "expense-tracker-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["build/index.js"],
+      "cwd": "${workspaceFolder}",
+      "dev": {
+        "watch": "build/**/*.js",
+        "debug": {
+          "type": "node"
+        }
+      },
+      "env": {
+        "DATABASE_URL": "mongodb+srv://kashyap51650:kashyap%40123@awsmumbai.j63wqyw.mongodb.net/expense_tracker_mcp?retryWrites=true&w=majority"
+      }
+    }
+  }
+}

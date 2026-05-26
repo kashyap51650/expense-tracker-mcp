@@ -1,0 +1,30 @@
+{
+  "name": "expense-tracker-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "expense-tracker-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "start": "node build/index.js",
+    "start:render": "npm run prisma:dbpush && node build/index.js",
+    "inspect": "npm run build && mcp-inspector node build/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:dbpush": "prisma db push"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.16.0",
+    "@prisma/client": "^6.10.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.14.3",
+    "@types/node": "^22.15.21",
+    "prisma": "^6.10.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
