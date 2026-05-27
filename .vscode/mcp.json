@@ -10,9 +10,6 @@
         "debug": {
           "type": "node"
         }
-      },
-      "env": {
-        "DATABASE_URL": "mongodb+srv://kashyap51650:kashyap%40123@awsmumbai.j63wqyw.mongodb.net/expense_tracker_mcp?retryWrites=true&w=majority"
       }
     }
   }
