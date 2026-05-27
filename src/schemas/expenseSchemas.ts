@@ -45,6 +45,8 @@ export const createCategorySchema = z.object({
   name: z.string().min(1).max(100),
 });
 
+export const listCategoriesSchema = z.object({});
+
 export const budgetStatusSchema = z.object({
   monthlyBudget: z.number().positive(),
   month: z.number().int().min(1).max(12).optional(),

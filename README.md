@@ -49,11 +49,11 @@ This builds the project and starts MCP Inspector connected to `node build/index.
 
 ## Deploy On Render
 
-This project uses MCP over stdio, so deploy it on Render as a Background Worker (not a Web Service).
+This project supports Streamable HTTP MCP, so deploy it on Render as a Web Service.
 
 1. Push this repository to GitHub.
 2. In Render, create a new Blueprint and select this repo.
-3. Render will detect `render.yaml` and create a worker service.
+3. Render will detect `render.yaml` and create a web service.
 4. Add `DATABASE_URL` in Render environment variables.
 5. Deploy.
 
@@ -64,5 +64,17 @@ The included `render.yaml` uses:
 
 `start:render` runs Prisma schema sync (`prisma db push`) before starting the MCP server.
 
-Note:
-Because this server is stdio-based, it is best suited for MCP runtimes that can spawn and communicate with the process over stdio. A public HTTP endpoint is not exposed by this server.
+Runtime behavior:
+
+- On Render (or whenever `PORT` is set), the server starts in Streamable HTTP mode.
+- Endpoints:
+  - `POST /mcp` for initialize and client-to-server messages
+  - `GET /mcp` for SSE notifications
+  - `DELETE /mcp` to close a session
+  - `GET /health` for Render health checks
+- If you need stdio mode locally, set `MCP_TRANSPORT=stdio`.
+
+Troubleshooting:
+
+- If your service fails health checks, confirm `healthCheckPath: /health` in `render.yaml`.
+- If the app starts in the wrong mode, explicitly set `MCP_TRANSPORT` to `http` or `stdio`.
